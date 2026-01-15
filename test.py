@@ -1,20 +1,13 @@
 from appium import webdriver
-from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Capabilities
-appium = UiAutomator2Options()
-appium.platform_name = "Android"
-appium.device_name = "Pixel 4 XL"
-appium.automation_name = "UiAutomator2"
-appium.app = None
-appium.app_package = "com.videotron.helixtv"
-appium.app_activity = "com.xfinity.common.view.LaunchActivity"
-appium.ensure_webviews_have_pages = True
-appium.native_instruments_lib = True
+import capabilities
+
+# HelixTv Capabilities
+appium = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 
 # Connect to Appium Server
 driver = webdriver.Remote("http://127.0.0.1:4723", options=appium)
@@ -23,7 +16,7 @@ try:
     print("Starting Session...")
     
     # Take screenshot to see current state
-    driver.save_screenshot("screenshot.png")
+    driver.save_screenshot("starting_page.png")
     print("Screenshot taken")
     
     # Wait up to 10 seconds for the Get Started button to appear
