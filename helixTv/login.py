@@ -3,8 +3,11 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 import capabilities
+import navigation
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
