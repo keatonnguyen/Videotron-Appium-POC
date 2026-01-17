@@ -21,4 +21,5 @@ def getCapabilities(device, appName):
 
     appium.ensure_webviews_have_pages = True
     appium.native_instruments_lib = True
+    appium.no_reset = True
     return appium
