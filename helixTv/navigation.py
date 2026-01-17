@@ -13,8 +13,7 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 
 # Connect to Appium Server
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-
-
+wait = WebDriverWait(driver, 15)
 
 # -------------------------------------------NAVIGATION BAR-------------------------------------------
 
@@ -100,19 +99,30 @@ def goToDateTimeChannels():
 
 # Go to TVA Channel
 def goToTVA():
-    goToLiveTV()
-    tvaChannel = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")'))
-        )
-    tvaChannel.click()
+    foundChannels = False
+    while not foundChannels:
+        goToLiveTV()
+        if(wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")')))):
+            filterButton = wait.until(
+                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")'))
+                )
+            filterButton.click()
+            foundChannels = True
+        time.sleep(5)
     time.sleep(10)
 
 # Go to Adult Channel
 def goToAdultChannel():
-    goToLiveTV()
-    adultChannel = wait.until(
-        EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 340. Playboy Enterprises. '))
-        )
-    adultChannel.click()
+    foundChannels = False
+    while not foundChannels:
+        goToLiveTV()
+        if(wait.until(EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 340. Playboy Enterprises. ')))):
+            filterButton = wait.until(
+                EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 340. Playboy Enterprises. '))
+                )
+            filterButton.click()
+            foundChannels = True
+        time.sleep(5)
     time.sleep(10)
+
 

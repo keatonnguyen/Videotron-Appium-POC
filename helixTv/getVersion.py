@@ -15,6 +15,7 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 
 # Connect to Appium Server
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+wait = WebDriverWait(driver, 15)
 
 def getVersion():
     try:
@@ -22,8 +23,8 @@ def getVersion():
         time.sleep(10)
 
         # Navigate to profile section
+        navigation.goToHome()
         navigation.goToProfile()
-        time.sleep(10)
 
         # Get RDK Version
         rdkVersion = wait.until(
