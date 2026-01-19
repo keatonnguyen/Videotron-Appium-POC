@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-import helixTv.functions.helix_navigator.home_page.home as home
+import home
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -19,6 +19,15 @@ driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
 
 
+
+# Go to Done                       A CHANGER
+def goToDone():
+    home.goToSettings()
+    doneSection = wait.until(
+        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(12)'))
+        )
+    doneSection.click()
+    time.sleep(10)
 
 # Go to This Device
 def goToThisDevice():

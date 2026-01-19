@@ -23,8 +23,9 @@ wait = WebDriverWait(driver, 15)
 # Go to Settings
 def goToSettings():
     main.goToHome()
+    time.sleep(5)
     main.goToBack()
-    time.sleep(10)
+    time.sleep(5)
 
 # Go to Airplay
 def goToAirplay():
