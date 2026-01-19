@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-import home
+import helixTv.functions.helix_navigator.home_page.home as home
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -17,6 +17,7 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 # Connect to Appium Server
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
+
 
 
 # Go to This Device

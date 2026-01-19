@@ -1,5 +1,6 @@
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from helixTv.functions.helix_navigator.homepage import home
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -9,7 +10,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-from helix_navigator import main, home
+from helix_navigator import main
+from helix_navigator import home
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -17,6 +19,8 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 # Connect to Appium Server
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
+
+
 
 # Set Parental Control
 def setParentalCtrl(pinCode):
@@ -51,7 +55,7 @@ def disableParentalCtrl(pinCode):
     time.sleep(5)
 
     # Go to Profile
-    home.goToProfile()
+    home.goToSettings()
     time.sleep(5)
 
     # Go to Parental Control

@@ -17,6 +17,7 @@ driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
 
 
+
 # Go to Home Section
 def goToHome():
     homeSection = wait.until(
