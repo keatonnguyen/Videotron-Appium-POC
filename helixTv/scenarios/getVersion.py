@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-import navigation
+import helixTv.functions.helix_navigator.home as home
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -17,14 +17,16 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
 
+
+# Get RDK Version
 def getVersion():
     try:
         print("Starting Session...")
         time.sleep(10)
 
         # Navigate to profile section
-        navigation.goToHome()
-        navigation.goToProfile()
+        home.goToSettings()
+        time.sleep(5)
 
         # Get RDK Version
         rdkVersion = wait.until(
