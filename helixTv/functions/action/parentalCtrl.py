@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-from pages import main
+from navigation import main
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -105,13 +105,6 @@ def setParentalCtrlLevel(level):
     elif level == "All":
         levelButton = wait.until(
             EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("G, 8+, 13+, 16+ et 18+")'))
-            )
-        levelButton.click()
-        time.sleep(3)
-    
-    elif level == "None":
-        levelButton = wait.until(
-            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Aucun")'))
             )
         levelButton.click()
         time.sleep(3)

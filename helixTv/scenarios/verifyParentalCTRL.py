@@ -10,20 +10,20 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from functions.actions import parentalCtrl, search, entity
-from functions.pages import liveTv, main, settings
+from functions.action import parentalCtrl, search, entity
+from functions.navigation import liveTv, main, home, settings
 
 from helixTv.functions.driver import initialize_driver, get_driver, get_wait, quit_driver
+initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
-
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Verify Parental Control
 def verifyParentalCtrl_Adult():
-    levels = ["Adult", "Teen", "Child", "All", "None"]
+    levels = ["Adult", "Teen", "Child", "All"]
     test = []
 
     # Set parental control
@@ -48,7 +48,7 @@ def verifyParentalCtrl_Adult():
         main.goToBack()
         
         # Extra steps for 13+ and PG content
-        if level == "Teen" :
+        if level in ["Teen", "Child", "All"] :
             main.goToSearch()
             search.searchContent("Alien: Romulus")
             entity.playContent()
@@ -62,7 +62,7 @@ def verifyParentalCtrl_Adult():
             main.goToBack()
             time.sleep(3)
         
-        if level == "Child" :
+        if level in ["Child", "All"] :
             main.goToSearch()
             search.searchContent("Spider-Man: loin des siens")
             lock = wait.until(
@@ -75,14 +75,25 @@ def verifyParentalCtrl_Adult():
             main.goToBack()
             time.sleep(3)
 
+        if level == "All" :
+            main.goToSearch()
+            search.searchContent("Bluey")
+            entity.playContent()
+            lock = wait.until(
+                EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/playback_lock_headline'))
+            )
+            if lock:
+                test.append(" passed")
+            else:
+                test.append(" failed")
+
         main.goToHome()
         time.sleep(5)
         for i in test:
             print("Parental Control Level " + level + ": " + i)
 
-
     # Cleanup
-    main.goToSettings()
+    home.goToSettings()
     settings.goToParentalCtrl()
     parentalCtrl.resetParentalCtrl()
     parentalCtrl.disableParentalCtrl()

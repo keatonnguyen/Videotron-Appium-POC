@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-from pages import main
+from navigation import main
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -26,19 +26,26 @@ wait = get_wait()
 
 #//////////////////////////////////////////////////////////////////////////////////////////////
 
-# Search for a content
-def searchContent(contentName):
-    main.goToSearch()
-    searchBox = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'Search'))
+# Play Content
+def playContent():
+    playButton = wait.until(
+        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/entity_action_icon'))
         )
-    searchBox.click()
-    time.sleep(3)   
-    searchBox.send_keys(contentName)
-    time.sleep(3)
-    firstResult = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/image_view'))
-        )
-    firstResult.click()
-    time.sleep(3)
+    playButton.click()
+    time.sleep(5)
 
+# Add to Favorites
+def addToFavorites():
+    favoriteButton = wait.until(
+        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/entity_favorite'))
+        )
+    favoriteButton.click()
+    time.sleep(5)
+
+# More
+def moreOptions():
+    moreButton = wait.until(
+        EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, "Plus d'options"))
+        )
+    moreButton.click()
+    time.sleep(3)

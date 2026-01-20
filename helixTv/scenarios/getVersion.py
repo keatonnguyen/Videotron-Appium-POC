@@ -10,10 +10,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from helixTv.functions.driver import initialize_driver, get_driver, get_wait, quit_driver
+initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
-import helixTv.functions.pages.home as home
+import helixTv.functions.navigation.home as home
 
 
 
