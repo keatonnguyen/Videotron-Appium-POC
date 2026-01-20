@@ -9,7 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-from pages import main, home, settings
+from pages import main
 
 # HelixTv Capabilities
 options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
@@ -18,112 +18,100 @@ options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
 wait = WebDriverWait(driver, 15)
 
+from helixTv.functions.driver import get_driver, get_wait
+driver = get_driver()
+wait = get_wait()
 
+
+
+#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Set PIN
-def setPin(pinCode):
+def setPin():
+    pinCode =["keypadOne", "keypadTwo", "keypadThree", "keypadFour"]
+
     for digit in pinCode:
             pinButton = wait.until(
-                EC.presence_of_element_located((AppiumBy.XPATH, f'new UiSelector().text("{digit}")'))
+                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{digit}")'))
                 )
             pinButton.click()
             time.sleep(3)
-    time.sleep(5)
+    time.sleep(3)
 
 # Set Parental Control
-def setParentalCtrl(pinCode):
-    # Go to Parental Control
-    main.goToHome()
-    time.sleep(5)
-    home.goToSettings()
-    time.sleep(5)
-    settings.goToParentalCtrl()
-    time.sleep(5)
-
-    # Turn On Parental Control
+def setParentalCtrl():
     enableParentalCtrlButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(4)'))
+        EC.presence_of_element_located((AppiumBy.ID, 'android:id/switch_widget'))
         )
     enableParentalCtrlButton.click()
-    time.sleep(5)
-    setPin(pinCode)
-    main.goToBack()
-    time.sleep(5)
-    settings.goToDone()
-    time.sleep(5)
+    time.sleep(3)
+    setPin()
+    time.sleep(3)
+    if(wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))):
+        setPin()
+        time.sleep(3)
 
 # Disable Parental Control
-def disableParentalCtrl(pinCode):
-    # Go to Parental Control
-    main.goToHome()
-    time.sleep(5)
-    home.goToSettings()
-    time.sleep(5)
-    parentalCTRLSection = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(5)'))
-        )
-    parentalCTRLSection.click()
-    time.sleep(5)
-
-    # Reset Parental Control
-    setPin(pinCode)
+def disableParentalCtrl():
     enableParentalCtrlButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(2)'))
+        EC.presence_of_element_located((AppiumBy.ID, 'android:id/switch_widget'))
         )
     enableParentalCtrlButton.click()
-    setPin(pinCode)
-    time.sleep(5)
-
-# Set Parental Control Level
-def setParentalCtrlLevel(level, pinCode):
-    # Go to Parental Control
-    home.goToSettings()
-    time.sleep(5)
-    settings.goToParentalCtrl()
-    time.sleep(5)
-
-    isParentalCtrlSet = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(3)'))
-        )
-    if isParentalCtrlSet:
-        setPin(pinCode)
-    time.sleep(5)
-    
-    # Go to TV ratings
-    tvRatingsButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().className("android.view.View").instance(3)'))
-        )
-    tvRatingsButton.click()
-    time.sleep(5)
-    if level == "Adult":
-        levelButton = wait.until(
-            EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().text("Adult")'))
-            )
-        levelButton.click()
-        time.sleep(5)
-    elif level == "Teen":
-        levelButton = wait.until(
-            EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().text("Teen")'))
-            )
-        levelButton.click()
-        time.sleep(5)
-    elif level == "Child":
-        levelButton = wait.until(
-            EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().text("Child")'))
-            )
-        levelButton.click()
-        time.sleep(5)
-    main.goToBack()
-    time.sleep(5)
-    main.goToBack()
-    time.sleep(5)
-    settings.goToDone()
-    time.sleep(5)
+    time.sleep(3)
+    setPin()
+    time.sleep(3)
+    if(wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))):
+        setPin()
+        time.sleep(3)
 
 # Reset Parental Control
 def resetParentalCtrl():
+    main.scrollDown()
     resetButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.XPATH, 'new UiSelector().text("Reset")'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Réinitialiser les restrictions")'))
         )
     resetButton.click()
     time.sleep(5)
+
+# Set Parental Control Level
+def setParentalCtrlLevel(level):
+    tvRatingButton = wait.until(
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Réinitialiser les restrictions")'))
+        )  
+    tvRatingButton.click()
+    time.sleep(3)
+
+    if level == "Adult":
+        levelButton = wait.until(
+            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("18+")'))
+            )
+        levelButton.click()
+        time.sleep(3)
+
+    elif level == "Teen":
+        levelButton = wait.until(
+            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("13+, 16+ et 18+")'))
+            )
+        levelButton.click()
+        time.sleep(3)
+
+    elif level == "Child":
+        levelButton = wait.until(
+            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("8+, 13+, 16+ et 18+")'))
+            )
+        levelButton.click()
+        time.sleep(3)
+
+    elif level == "All":
+        levelButton = wait.until(
+            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("G, 8+, 13+, 16+ et 18+")'))
+            )
+        levelButton.click()
+        time.sleep(3)
+    
+    elif level == "None":
+        levelButton = wait.until(
+            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Aucun")'))
+            )
+        levelButton.click()
+        time.sleep(3)

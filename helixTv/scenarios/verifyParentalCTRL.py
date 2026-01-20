@@ -1,3 +1,4 @@
+from modulefinder import test
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,61 +7,73 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import capabilities
-from functions.actions import parentalCtrl
-from functions.pages import liveTv, main
+from functions.actions import parentalCtrl, search, entity
+from functions.pages import liveTv, main, settings
 
-# HelixTv Capabilities
-options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
-
-# Connect to Appium Server
-driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-wait = WebDriverWait(driver, 15)
+from helixTv.functions.driver import initialize_driver, get_driver, get_wait, quit_driver
+driver = get_driver()
+wait = get_wait()
 
 
+
+#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Verify Parental Control
 def verifyParentalCtrl_Adult():
-    levels = ["Adult", "Teen", "Child", "None"]
+    levels = ["Adult", "Teen", "Child", "All", "None"]
     test = []
 
     # Set parental control
-    parentalCtrl.setParentalCtrl("1234")
+    main.goToSettings()
+    settings.goToParentalCtrl()
+    parentalCtrl.setParentalCtrl()
 
     for level in levels:
-        parentalCtrl.setParentalCtrlLevel(level, "1234")
+        parentalCtrl.setParentalCtrlLevel(level)
+        main.goToBack()
+        main.goToBack()
 
         # Verify Adult Content Access
         liveTv.goToAdultChannel()
-        pinVisibility = wait.until(
-            EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helix.tv:id/adult_content_toggle")'))
+        lock = wait.until(
+            EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/playback_lock_headline'))
         )
-        if pinVisibility:
+        if lock:
             test.append(" passed")
         else:
             test.append("failed")
+        main.goToBack()
         
         # Extra steps for 13+ and PG content
-        if level != "Adult" :
-            # Verify that 13+ content is blocked
-
-            
-            if pinVisibility:
+        if level == "Teen" :
+            main.goToSearch()
+            search.searchContent("Alien: Romulus")
+            entity.playContent()
+            lock = wait.until(
+                EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/playback_lock_headline'))
+            )
+            if lock:
                 test.append(" passed")
             else:
                 test.append(" failed")
+            main.goToBack()
+            time.sleep(3)
         
-        # Extra steps for PG content
         if level == "Child" :
-            # Verify that child content is blocked
-
-
-            if pinVisibility:
+            main.goToSearch()
+            search.searchContent("Spider-Man: loin des siens")
+            lock = wait.until(
+                EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/playback_lock_headline'))
+            )
+            if lock:
                 test.append(" passed")
             else:
                 test.append(" failed")
+            main.goToBack()
+            time.sleep(3)
 
         main.goToHome()
         time.sleep(5)
@@ -69,8 +82,10 @@ def verifyParentalCtrl_Adult():
 
 
     # Cleanup
-    parentalCtrl.resetParentalCtrl("1234")
-    parentalCtrl.disableParentalCtrl("1234")
+    main.goToSettings()
+    settings.goToParentalCtrl()
+    parentalCtrl.resetParentalCtrl()
+    parentalCtrl.disableParentalCtrl()
 
 
 

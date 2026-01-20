@@ -11,46 +11,28 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import capabilities
 import main
 
+from helixTv.functions.driver import get_driver, get_wait
+driver = get_driver()
+wait = get_wait()
 
 
-# HelixTv Capabilities
-options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
 
-# Connect to Appium Server
-driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-wait = WebDriverWait(driver, 15)
-
-# Go to Filter Channels
-def goToFilterChannels():
-    main.goToLiveTV()
-    filterButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/filters_button'))
-        )
-    filterButton.click()
-    time.sleep(10)
-
-# Go to Date & Time Channels
-def goToDateTimeChannels():
-    main.goToLiveTV()
-    dateTimeButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/date_display'))
-        )
-    dateTimeButton.click()
-    time.sleep(10)
+#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Go to TVA Channel
 def goToTVA():
     foundChannels = False
     while not foundChannels:
         main.goToLiveTV()
-        if(wait.until(EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")')))):
+        if(wait.until(EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 3. Télé-Québec (Société de télédiffusion du Québec). ')))):
             filterButton = wait.until(
-                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")'))
+                EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 3. Télé-Québec (Société de télédiffusion du Québec). '))
                 )
             filterButton.click()
             foundChannels = True
-        time.sleep(5)
-    time.sleep(10)
+        time.sleep(3)
+        main.scrollDown()
+    time.sleep(3)
 
 # Go to Adult Channel
 def goToAdultChannel():
@@ -63,6 +45,7 @@ def goToAdultChannel():
                 )
             filterButton.click()
             foundChannels = True
-        time.sleep(5)
-    time.sleep(10)
+        time.sleep(3)
+        main.scrollDown()
+    time.sleep(3)
 
