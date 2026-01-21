@@ -8,16 +8,10 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from functions.navigation import main
-
-from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+from helixTv.driver import get_driver, get_wait, initialize_driver
 initialize_driver("Pixel 4", "helixTv")
 driver = get_driver()
 wait = get_wait()
-
-
-
-#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Filter by Favorites
 def filterByFavorites():

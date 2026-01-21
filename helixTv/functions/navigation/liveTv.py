@@ -8,19 +8,11 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import capabilities
-from . import main
-from functions.action import filter
-
-from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+from helixTv.driver import get_driver, get_wait, initialize_driver
 initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
 short_wait = WebDriverWait(driver, 10)  # 10-second timeout
-
-
-
-#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Go to TVA Channel
 def goToTVA():

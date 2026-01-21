@@ -8,18 +8,11 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import capabilities
-from . import home
 from functions.action import parentalCtrl
-
-from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+from helixTv.driver import get_driver, get_wait, initialize_driver
 initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
-
-
-
-#//////////////////////////////////////////////////////////////////////////////////////////////
 
 # Go to Done                       
 def goToDone():

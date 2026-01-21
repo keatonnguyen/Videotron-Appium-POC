@@ -8,20 +8,15 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from navigation import main
-
-from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+from helixTv.functions.navigation import navigationbar
+from helixTv.driver import get_driver, get_wait, initialize_driver
 initialize_driver("Pixel 4", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
-
-
-#//////////////////////////////////////////////////////////////////////////////////////////////
-
 # Search for a content
 def searchContent(contentName):
-    main.goToSearch()
+    navigationbar.goToSearch()
     searchBox = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText")'))
         )
