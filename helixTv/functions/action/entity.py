@@ -25,7 +25,7 @@ def playContent():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helixtv:id/entity_action_text")'))
         )
     playButton.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Add to Favorites
 def addToFavorites():
@@ -33,7 +33,7 @@ def addToFavorites():
         EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/entity_favorite'))
         )
     favoriteButton.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # More
 def moreOptions():

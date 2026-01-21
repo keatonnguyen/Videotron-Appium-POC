@@ -22,7 +22,7 @@ from . import main
 # Go to Settings
 def goToSettings():
     main.goToBack()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Airplay
 def goToAirplay():
@@ -30,4 +30,4 @@ def goToAirplay():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().description("Diffuser. Déconnecté")'))
         )
     airplaySection.click()
-    time.sleep(10)
+    time.sleep(3)

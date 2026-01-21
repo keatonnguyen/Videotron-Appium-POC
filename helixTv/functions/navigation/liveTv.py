@@ -33,7 +33,7 @@ def goToTVA():
             channel.click()
             foundChannels = True
         except:
-            time.sleep(1)
+            time.sleep(2)
     time.sleep(3)
 
 # Go to Adult Channel
@@ -47,6 +47,6 @@ def goToAdultChannel():
             channel.click()
             foundChannels = True
         except:
-            time.sleep(1)
+            time.sleep(2)
     time.sleep(3)
 

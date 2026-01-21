@@ -27,7 +27,7 @@ def goToDone():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().description("Revenir en arrière")'))
         )
     doneSection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to This Device
 def goToThisDevice():
@@ -35,7 +35,7 @@ def goToThisDevice():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Cet appareil :")'))
         )
     thisDeviceSection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Playback Preferences
 def goToPlaybackPreferences():
@@ -43,7 +43,7 @@ def goToPlaybackPreferences():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Préférences de lecture")'))
         )
     playbackPreferencesSection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Accessibility
 def goToAccessibility():
@@ -51,7 +51,7 @@ def goToAccessibility():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Accessibilité")'))
         )
     accessibilitySection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Parental Controls
 def goToParentalCtrl():
@@ -64,7 +64,7 @@ def goToParentalCtrl():
         parentalCtrl.setPin()
     except:
         pass
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Manage Devices
 def goToManageDevices():
@@ -72,7 +72,7 @@ def goToManageDevices():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Gérer les appareils")'))
         )
     manageDevicesSection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Help
 def goToHelp():
@@ -80,7 +80,7 @@ def goToHelp():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Aide")'))
         )
     helpSection.click()
-    time.sleep(5)
+    time.sleep(3)
 
 # Go to Terms & Policies
 def goToTermsPolicies():
@@ -88,4 +88,4 @@ def goToTermsPolicies():
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().textContains("Conditions")'))
         )
     termsPoliciesSection.click()
-    time.sleep(5)
+    time.sleep(3)
