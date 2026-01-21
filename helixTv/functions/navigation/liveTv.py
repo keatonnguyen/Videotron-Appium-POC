@@ -9,11 +9,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import capabilities
-import main
+from . import main
+from functions.action import filter
 
-from helixTv.functions.driver import get_driver, get_wait
+from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
+short_wait = WebDriverWait(driver, 10)  # 10-second timeout
 
 
 
@@ -23,29 +26,27 @@ wait = get_wait()
 def goToTVA():
     foundChannels = False
     while not foundChannels:
-        main.goToLiveTV()
-        if(wait.until(EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 3. Télé-Québec (Société de télédiffusion du Québec). ')))):
-            filterButton = wait.until(
-                EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 3. Télé-Québec (Société de télédiffusion du Québec). '))
+        try:
+            channel = short_wait.until(
+                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("4")'))
                 )
-            filterButton.click()
+            channel.click()
             foundChannels = True
-        time.sleep(3)
-        main.scrollDown()
+        except:
+            time.sleep(1)
     time.sleep(3)
 
 # Go to Adult Channel
 def goToAdultChannel():
     foundChannels = False
     while not foundChannels:
-        main.goToLiveTV()
-        if(wait.until(EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 340. Playboy Enterprises. ')))):
-            filterButton = wait.until(
-                EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Chaîne : 340. Playboy Enterprises. '))
+        try:
+            channel = short_wait.until(
+                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("340")'))
                 )
-            filterButton.click()
+            channel.click()
             foundChannels = True
-        time.sleep(3)
-        main.scrollDown()
+        except:
+            time.sleep(1)
     time.sleep(3)
 

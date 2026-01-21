@@ -8,17 +8,10 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import capabilities
 from navigation import main
 
-# HelixTv Capabilities
-options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
-
-# Connect to Appium Server
-driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-wait = WebDriverWait(driver, 15)
-
-from helixTv.functions.driver import get_driver, get_wait
+from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+initialize_driver("Pixel 4", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
@@ -30,15 +23,19 @@ wait = get_wait()
 def searchContent(contentName):
     main.goToSearch()
     searchBox = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'Search'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText")'))
         )
     searchBox.click()
-    time.sleep(3)   
+    time.sleep(2)
+    
+    searchBox = wait.until(
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helixtv:id/search_src_text")'))
+        )
     searchBox.send_keys(contentName)
-    time.sleep(3)
+    time.sleep(2)
+
     firstResult = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/image_view'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helixtv:id/image_view")'))
         )
     firstResult.click()
-    time.sleep(3)
-
+    time.sleep(2)

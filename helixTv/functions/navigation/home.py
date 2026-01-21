@@ -9,7 +9,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from helixTv.functions.driver import get_driver, get_wait
+from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
@@ -20,14 +21,11 @@ from . import main
 
 # Go to Settings
 def goToSettings():
-    main.goToHome()
-    time.sleep(5)
     main.goToBack()
     time.sleep(5)
 
 # Go to Airplay
 def goToAirplay():
-    main.goToHome()
     airplaySection = wait.until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().description("Diffuser. Déconnecté")'))
         )

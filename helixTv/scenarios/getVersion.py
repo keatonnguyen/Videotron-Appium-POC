@@ -10,11 +10,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from helixTv.functions.driver import initialize_driver, get_driver, get_wait, quit_driver
-initialize_driver("Pixel 4 XL", "helixTv")
+initialize_driver("Pixel 4", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
 import helixTv.functions.navigation.home as home
+import helixTv.functions.navigation.main as main
 
 
 
@@ -23,21 +24,19 @@ import helixTv.functions.navigation.home as home
 # Get RDK Version
 def getVersion():
     try:
-        # Initialize driver
-        initialize_driver("Pixel 4 XL", "helixTv")
         print("Starting Session...")
-        time.sleep(5)
+        driver.activate_app("com.videotron.helixtv")
 
         # Navigate to profile section
         home.goToSettings()
-        time.sleep(3)
 
         # Get RDK Version
         rdkVersion = wait.until(
             EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.TextView[@resource-id="android:id/title" and contains(@text, "Version")]'))
         )
-        time.sleep(3)
         print("RDK Version: ", rdkVersion.text)
+
+        main.goToBack()
         
     finally:
         quit_driver()

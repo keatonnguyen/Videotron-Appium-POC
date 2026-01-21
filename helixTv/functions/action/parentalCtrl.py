@@ -8,17 +8,10 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import capabilities
-from navigation import main
+from functions.navigation import main
 
-# HelixTv Capabilities
-options = capabilities.getCapabilities("Pixel 4 XL", "helixTv")
-
-# Connect to Appium Server
-driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-wait = WebDriverWait(driver, 15)
-
-from helixTv.functions.driver import get_driver, get_wait
+from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+initialize_driver("Pixel 4", "helixTv")
 driver = get_driver()
 wait = get_wait()
 
@@ -32,7 +25,7 @@ def setPin():
 
     for digit in pinCode:
             pinButton = wait.until(
-                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{digit}")'))
+                EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().resourceId("com.videotron.helixtv:id/{digit}")'))
                 )
             pinButton.click()
             time.sleep(3)
@@ -41,28 +34,34 @@ def setPin():
 # Set Parental Control
 def setParentalCtrl():
     enableParentalCtrlButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'android:id/switch_widget'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("android:id/switch_widget")'))
         )
     enableParentalCtrlButton.click()
     time.sleep(3)
     setPin()
     time.sleep(3)
-    if(wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))):
+    try:
+        wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))
         setPin()
         time.sleep(3)
+    except:
+        pass
 
 # Disable Parental Control
 def disableParentalCtrl():
     enableParentalCtrlButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.ID, 'android:id/switch_widget'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("android:id/switch_widget")'))
         )
     enableParentalCtrlButton.click()
     time.sleep(3)
     setPin()
     time.sleep(3)
-    if(wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))):
+    try:
+        wait.until(EC.presence_of_element_located((AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')))
         setPin()
         time.sleep(3)
+    except:
+        pass
 
 # Reset Parental Control
 def resetParentalCtrl():
@@ -76,7 +75,7 @@ def resetParentalCtrl():
 # Set Parental Control Level
 def setParentalCtrlLevel(level):
     tvRatingButton = wait.until(
-        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Réinitialiser les restrictions")'))
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Classement d’émission de télévision (français)")'))
         )  
     tvRatingButton.click()
     time.sleep(3)

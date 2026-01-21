@@ -13,8 +13,7 @@ def initialize_driver(device, app_name):
     if _driver is None:
         options = capabilities.getCapabilities(device, app_name)
         _driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
-        _wait = WebDriverWait(_driver, 15)
-    
+        _wait = WebDriverWait(_driver, 40)
     return _driver, _wait
 
 def get_driver():

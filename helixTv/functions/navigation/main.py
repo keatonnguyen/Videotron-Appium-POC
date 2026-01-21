@@ -9,10 +9,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from helixTv.functions.driver import get_driver, get_wait
+from helixTv.functions.driver import get_driver, get_wait, initialize_driver
+initialize_driver("Pixel 4 XL", "helixTv")
 driver = get_driver()
 wait = get_wait()
-
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,5 +56,5 @@ def goToBack():
     time.sleep(3)
 
 def scrollDown():
-    driver.swipe(500, 1500, 500, 500, 800)
+    driver.swipe(500, 1500, 500, 300, 500)
     time.sleep(3)
