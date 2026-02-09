@@ -1,0 +1,9 @@
+from .base_page import BasePage
+from ..utils.locators import SearchLocators
+
+class SearchPage(BasePage):
+
+    def search_content(self, content_name):
+        self.click(SearchLocators.SEARCH_BOX)
+        self.type(SearchLocators.SEARCH_TEXT, content_name)
+        self.click(SearchLocators.FIRST_RESULT)
