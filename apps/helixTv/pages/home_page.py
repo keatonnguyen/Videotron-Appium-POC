@@ -1,0 +1,12 @@
+from helixTv.pages.settings_page import SettingsPage
+from ....common.base_page import BasePage
+from ..utils.locators import HomeLocators
+
+class HomePage(BasePage):
+
+    def go_to_settings(self):
+        self.click(HomeLocators.SETTINGS_BUTTON)
+        return SettingsPage(self.driver)
+
+    def go_to_airplay(self):
+        self.click(HomeLocators.AIRPLAY_BUTTON)
