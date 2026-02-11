@@ -2,8 +2,8 @@ from common.base_page import BasePage
 
 from apps.helixTv.utils.locators import EntityLocators
 
-class EntityPage(BasePage):
 
+class EntityPage(BasePage):
     def play_content(self):
         self.click(EntityLocators.PLAY_BUTTON)
     

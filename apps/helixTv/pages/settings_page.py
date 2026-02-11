@@ -4,8 +4,8 @@ from apps.helixTv.utils.locators import ParentalCtrlLocators, SettingsLocators
 
 from apps.helixTv.pages.parentalCtrl_page import ParentalCtrlPage
 
-class SettingsPage(BasePage):
 
+class SettingsPage(BasePage):
     def go_to_playback_preferences(self):
         self.click(SettingsLocators.PLAYBACK_PREFERENCES_SECTION)
     
