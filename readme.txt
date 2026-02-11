@@ -6,7 +6,7 @@ Setup
 
 3. Check Devices: adb devices
 
-4. Run tests: pytest tests/test_x.py --alluredir=allure-results
+4. Run tests: pytest apps/helixTv/tests/test_getversion.py --alluredir=allure-results
 
 5. View report: allure serve allure-results
 

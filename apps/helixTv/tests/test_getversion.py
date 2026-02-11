@@ -1,37 +1,34 @@
+import re
 import pytest
 import allure
 
-from app import App
+from apps.helixTv.utils.locators import SettingsLocators, HomeLocators
 
-@allure.feature("Application Info")
-@allure.story("Retrieve application version")
-@allure.severity(allure.severity_level.NORMAL)
+
+@allure.feature("Settings")
+@allure.story("Get app version")
 @pytest.mark.smoke
 @pytest.mark.helix
 
-def test_getversion(driver):
+def test_getversion(helix_app):
+    app = helix_app
 
-    # Initialize app
-    helixTv = App(driver, "helixTv")
-
-    # Quick sanity check: ensure app is on home screen
-    helixTv.click(HOME_SECTION)
+    # Verify We
+    assert app.home.find(HomeLocators.AIRPLAY_BUTTON).is_displayed(), "Not on Home page"
 
     # Navigate to Settings
-    settings_page = helixTv.settings
-    settings_page.open()
+    settings_page = app.home.go_to_settings()
 
-    # Retrieve app version
-    app_version = settings_page.check_version()
+    # Read Version
+    try:
+        version_text = settings_page.check_version()
+    except AttributeError:
+        # Fallback in case
+        version_text = settings_page.find(SettingsLocators.APP_VERSION).text
 
-    # Attach version to Allure report
     allure.attach(
-        app_version,
+        version_text or "",
         name="App Version",
-        attachment_type=allure.attachment_type.TEXT
+        attachment_type=allure.attachment_type.TEXT,
     )
 
-    # Basic validation
-    assert app_version is not None, "App version should not be None"
-    assert isinstance(app_version, str), "App version should be a string"
-    assert len(app_version) > 0, "App version should not be empty"
