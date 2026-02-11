@@ -1,5 +1,6 @@
-from ....common.base_page import BasePage
-from ..utils.locators import LiveTVLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import LiveTVLocators
 
 class LiveTvPage(BasePage):
 

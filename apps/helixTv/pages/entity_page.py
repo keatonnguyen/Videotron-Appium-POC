@@ -1,5 +1,6 @@
-from ....common.base_page import BasePage
-from ..utils.locators import EntityLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import EntityLocators
 
 class EntityPage(BasePage):
 

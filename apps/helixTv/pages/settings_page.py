@@ -1,6 +1,8 @@
-from helixTv.pages.parentalCtrl_page import ParentalCtrlPage
-from ....common.base_page import BasePage
-from ..utils.locators import SettingsLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import SettingsLocators
+
+from apps.helixTv.pages.parentalCtrl_page import ParentalCtrlPage
 
 class SettingsPage(BasePage):
 

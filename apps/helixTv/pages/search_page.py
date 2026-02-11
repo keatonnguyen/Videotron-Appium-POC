@@ -1,6 +1,8 @@
-from helixTv.pages.entity_page import EntityPage
-from ....common.base_page import BasePage
-from ..utils.locators import SearchLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import SearchLocators
+
+from apps.helixTv.pages.entity_page import EntityPage
 
 class SearchPage(BasePage):
 

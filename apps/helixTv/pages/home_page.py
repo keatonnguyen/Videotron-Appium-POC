@@ -1,6 +1,8 @@
-from helixTv.pages.settings_page import SettingsPage
-from ....common.base_page import BasePage
-from ..utils.locators import HomeLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import HomeLocators
+
+from apps.helixTv.pages.settings_page import SettingsPage
 
 class HomePage(BasePage):
 

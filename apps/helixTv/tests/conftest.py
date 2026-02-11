@@ -1,11 +1,11 @@
 import pytest
-from ...common.driver import initialize_driver
+from common.driver import initialize_driver
 from app import App
 
 @pytest.fixture
 def helix_app(request):
-    # 1. Determine which app we are testing
-    # You can get this from a marker or a CLI flag
+    
+    # 1. App name
     app_name = "helixTv" 
     
     # 2. Initialize

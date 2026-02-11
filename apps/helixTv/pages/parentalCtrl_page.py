@@ -1,5 +1,6 @@
-from ....common.base_page import BasePage
-from ..utils.locators import ParentalCtrlLocators
+from common.base_page import BasePage
+
+from apps.helixTv.utils.locators import ParentalCtrlLocators
 
 class ParentalCtrlPage(BasePage):
 

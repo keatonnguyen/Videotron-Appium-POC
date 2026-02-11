@@ -68,3 +68,6 @@ class SearchLocators:
     SEARCH_BOX = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.widget.EditText")')
     SEARCH_TEXT = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helixtv:id/search_src_text")')
     FIRST_RESULT = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.videotron.helixtv:id/image_view")')
+
+class LibraryLocators:
+    pass

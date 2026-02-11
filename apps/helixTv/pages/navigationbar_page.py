@@ -1,10 +1,11 @@
-from helixTv.pages.home_page import HomePage
-from helixTv.pages.library_page import LibraryPage
-from helixTv.pages.liveTv_page import LiveTvPage
-from helixTv.pages.search_page import SearchPage
-from ....common.base_page import BasePage
+from common.base_page import BasePage
 
-from ..utils.locators import GlobalLocators
+from apps.helixTv.utils.locators import GlobalLocators
+
+from apps.helixTv.pages.home_page import HomePage
+from apps.helixTv.pages.library_page import LibraryPage
+from apps.helixTv.pages.liveTv_page import LiveTvPage
+from apps.helixTv.pages.search_page import SearchPage
 
 class NavigationBar(BasePage):
 
