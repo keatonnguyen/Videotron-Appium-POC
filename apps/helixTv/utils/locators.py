@@ -42,10 +42,7 @@ class SettingsLocators:
 class ParentalCtrlLocators:
     # Pin
     PIN_PROMPT = (AppiumBy.ID, 'com.videotron.helixtv:id/pin_prompt_state')
-    
-    @staticmethod
-    def get_pin_digit(digit):
-        return (AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().resourceId("com.videotron.helixtv:id/{digit}")')
+    PIN_1 = (AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().resourceId("com.videotron.helixtv:id/{1}")')
 
     PARENTAL_CTRL_TOGGLE = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("android:id/switch_widget")')
     RESET_PARENTAL_CTRL_BUTTON = (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Réinitialiser les restrictions")')

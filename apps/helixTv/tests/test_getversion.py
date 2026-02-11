@@ -13,7 +13,7 @@ from apps.helixTv.utils.locators import SettingsLocators, HomeLocators
 def test_getversion(helix_app):
     app = helix_app
 
-    # Verify We
+    # Verify we are on Home page
     assert app.home.find(HomeLocators.AIRPLAY_BUTTON).is_displayed(), "Not on Home page"
 
     # Navigate to Settings

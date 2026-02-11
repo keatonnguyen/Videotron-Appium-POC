@@ -1,6 +1,6 @@
 from common.base_page import BasePage
 
-from apps.helixTv.utils.locators import SettingsLocators
+from apps.helixTv.utils.locators import ParentalCtrlLocators, SettingsLocators
 
 from apps.helixTv.pages.parentalCtrl_page import ParentalCtrlPage
 
@@ -14,6 +14,8 @@ class SettingsPage(BasePage):
 
     def go_to_parental_controls(self):
         self.click(SettingsLocators.PARENTAL_CONTROLS_SECTION)
+        if self.is_visible(ParentalCtrlLocators.PIN_PROMPT):
+            self.enter_pin()
         return ParentalCtrlPage(self.driver)
 
     def go_to_manage_devices(self):

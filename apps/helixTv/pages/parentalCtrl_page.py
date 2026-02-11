@@ -6,15 +6,17 @@ class ParentalCtrlPage(BasePage):
 
     def enter_pin(self):
         for i in range(4):
-            self.click(ParentalCtrlLocators.PIN_NUMBER_1)
+            self.click(ParentalCtrlLocators.PIN_1)
 
     def toggle_parental_ctrl(self):
         self.click(ParentalCtrlLocators.PARENTAL_CTRL_TOGGLE)
+        if self.find(ParentalCtrlLocators.PIN_PROMPT).is_displayed():
+            self.enter_pin()
 
     def reset_parental_ctrl(self):
         self.click(ParentalCtrlLocators.RESET_PARENTAL_CTRL_BUTTON)
     
-    def set_tv_rating(self):
+    def get_tv_rating(self):
         self.click(ParentalCtrlLocators.TV_RATING_BUTTON)
     
     def select_parental_ctrl_level(self, level):
