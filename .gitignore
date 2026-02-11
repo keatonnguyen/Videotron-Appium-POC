@@ -6,3 +6,7 @@ __pycache__/
 .idea/
 .vscode/
 .DS_Store
+.gitignore
+allure-results/
+user_data.json
+report.html

@@ -7,8 +7,8 @@ from apps.helixTv.pages.library_page import LibraryPage
 from apps.helixTv.pages.liveTv_page import LiveTvPage
 from apps.helixTv.pages.search_page import SearchPage
 
-class NavigationBar(BasePage):
 
+class NavigationBar(BasePage):
     def go_to_home(self):
         self.click(GlobalLocators.HOME_SECTION)
         return HomePage(self.driver)

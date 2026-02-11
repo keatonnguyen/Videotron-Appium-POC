@@ -3,17 +3,20 @@ import pytest
 import allure
 
 from apps.helixTv.utils.locators import SettingsLocators, HomeLocators
-
+from common.conftest import user_data
 
 @allure.feature("Settings")
 @allure.story("Get app version")
 @pytest.mark.smoke
-@pytest.mark.helix
+@pytest.mark.helixTv
+
 
 def test_getversion(helix_app):
     app = helix_app
+    username = user_data["helixTv_User"]["username"]
+    password = user_data["helixTv_User"]["password"]
 
-    # Verify We
+    # Verify home page is displayed
     assert app.home.find(HomeLocators.AIRPLAY_BUTTON).is_displayed(), "Not on Home page"
 
     # Navigate to Settings

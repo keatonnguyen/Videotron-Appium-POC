@@ -7,6 +7,7 @@ from apps.helixTv.pages.library_page import LibraryPage
 from apps.helixTv.pages.liveTv_page import LiveTvPage
 from apps.helixTv.pages.entity_page import EntityPage
 
+
 class App:
     def __init__(self, driver, app_name):
         self.driver = driver

@@ -2,8 +2,8 @@ from common.base_page import BasePage
 
 from apps.helixTv.utils.locators import LiveTVLocators
 
-class LiveTvPage(BasePage):
 
+class LiveTvPage(BasePage):
     def go_to_channel_4(self):
         self.click(LiveTVLocators.CHANNEL_4)
     

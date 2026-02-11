@@ -4,8 +4,8 @@ from apps.helixTv.utils.locators import HomeLocators
 
 from apps.helixTv.pages.settings_page import SettingsPage
 
-class HomePage(BasePage):
 
+class HomePage(BasePage):
     def go_to_settings(self):
         self.click(HomeLocators.SETTINGS_BUTTON)
         return SettingsPage(self.driver)

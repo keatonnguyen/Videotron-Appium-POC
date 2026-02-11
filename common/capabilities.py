@@ -1,6 +1,7 @@
 import yaml, os
 from appium.options.android import UiAutomator2Options
 
+
 class Capability:
 
     @staticmethod

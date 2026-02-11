@@ -2,8 +2,8 @@ from common.base_page import BasePage
 
 from apps.helixTv.utils.locators import ParentalCtrlLocators
 
-class ParentalCtrlPage(BasePage):
 
+class ParentalCtrlPage(BasePage):
     def enter_pin(self):
         for i in range(4):
             self.click(ParentalCtrlLocators.PIN_NUMBER_1)
