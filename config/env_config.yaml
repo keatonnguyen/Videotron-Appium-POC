@@ -1,0 +1,11 @@
+server: "http://127.0.0.1:4723"
+device: "Pixel 4 XL"
+
+apps:
+  helixTv:
+    package: "com.videotron.helixtv"
+    activity: "com.xfinity.common.view.LaunchActivity"
+    
+  helixFi:
+    package: "com.videotron.helixfi"
+    activity: "com.xfinity.common.view.LaunchActivity"

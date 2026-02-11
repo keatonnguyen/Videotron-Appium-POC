@@ -1,12 +1,14 @@
 Setup
 
-1. Download Requirements: pip install -r requirement.typing_extensions
+1. Download Requirements: pip install -r requirements.txt
 
 2. Launch Appium: appium
 
 3. Check Devices: adb devices
 
-4. Run test: python login.py
+4. Run tests: pytest apps/helixTv/tests/test_getversion.py --alluredir=allure-results
+
+5. View report: allure serve allure-results
 
 
 Find packages
