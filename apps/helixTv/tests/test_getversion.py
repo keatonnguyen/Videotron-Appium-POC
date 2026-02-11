@@ -28,6 +28,9 @@ def test_getversion(helix_app):
     except AttributeError:
         # Fallback in case
         version_text = settings_page.find(SettingsLocators.APP_VERSION).text
+    
+    # Cleanup
+    app.navigationBar.go_to_back()
 
     allure.attach(
         version_text or "",
