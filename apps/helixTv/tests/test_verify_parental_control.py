@@ -8,8 +8,8 @@ from apps.helixTv.utils.locators import SettingsLocators, HomeLocators, Parental
 
 @allure.feature("Settings")
 @allure.story("Verify Parental Control")
-@pytest.mark.smoke
-@pytest.mark.helix
+@pytest.mark.basic
+@pytest.mark.helixTv
 
 def test_verify_parental_control(helix_app):
     app = helix_app
