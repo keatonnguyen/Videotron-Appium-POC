@@ -10,7 +10,7 @@ from app import App
 def user_data(app_name):
 
     # Load user data from JSON
-    data_file = Path(__file__).parent / "data" / f"{app_name}_user_data.json"
+    data_file = Path(__file__).parent / "data" / "user_data.json"
     with open(data_file, "r") as f:
         data = json.load(f)
     return data
