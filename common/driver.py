@@ -4,7 +4,7 @@ from .capabilities import Capability
 
 
 def initialize_driver(app_name):
-    options, server_url = Capability.get_android_options(app_name)
+    options, server_url, package_name = Capability.get_android_options(app_name)
     driver = webdriver.Remote(server_url, options=options)
     wait = WebDriverWait(driver, 40)
-    return driver, wait
+    return driver, wait, package_name

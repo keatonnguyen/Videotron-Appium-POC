@@ -25,4 +25,4 @@ class Capability:
         options.no_reset = True
         options.ensure_webviews_have_pages = True
         
-        return options, config['server']
+        return options, config['server'], app_data['package']

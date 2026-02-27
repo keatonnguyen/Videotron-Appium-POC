@@ -19,10 +19,14 @@ def user_data(app_name):
 def helix_app(app_name):
     
     # Initialize driver
-    driver, wait = initialize_driver(app_name)
+    driver, wait, package_name = initialize_driver(app_name)
+    
+    # Ensure app is launched and in foreground
+    driver.activate_app(package_name)
     
     # Provide App manager to tests
     yield App(driver, app_name)
     
-    # Cleanup
+    # Cleanup - Terminate app and quit driver
+    driver.terminate_app(package_name)
     driver.quit()
